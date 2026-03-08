@@ -1,0 +1,9 @@
+.header{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: white;
+    max-height: 120px;
+}
+
+.container{
+    padding: 0px 200px;
+}
