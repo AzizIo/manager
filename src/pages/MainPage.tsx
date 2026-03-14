@@ -1,40 +1,76 @@
 import styles from './/MainPage.module.css'
 import Header from '../components/Header'
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 export default function MainPage() {
-
     const [projects, setProjects] = useState([])
-
     const [newProject, setNewProject] = useState("")
-    const [type, setType] = useState("")
-    const [status, setStatus] = useState("")
+    const [type, setType] = useState("Bot")
+    const [status, setStatus] = useState("New")
     const [searchTerm, setSearchTerm] = useState("")
-    const addProject = () => {
-        if (newProject.trim().length > 0) {
-            const newProjectObj = {
-                name: newProject,
-                type: type,
-                status: status
-            }
-            setType("")
-            setStatus("")
-            setProjects([...projects, newProjectObj])
-            setNewProject("")
+    const addProject = async (event) => {
+        event.preventDefault()
+        await fetch("http://localhost:8000/tasks", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-        }
+            body: JSON.stringify({
+                name: newProject,
+                title: type,
+                status: status
+            })
+        })
+
+        const res = await fetch("http://localhost:8000/tasks")
+        const data = await res.json()
+
+        setProjects(data)
+
+        setNewProject("")
+        setType("Bot")
+        setStatus("New")
+
+
     }
-    const onSubmit = (event) => {
-        event.preventDefault();
-        addProject();
+
+    const deleteProject = async (id) => {
+        await fetch(`http://localhost:8000/tasks/${id}`, {
+            method: "DELETE",
+        })
+        setProjects(prev => prev.filter(project => project.id !== id))
     }
+
+    const delete_all = async (e) => {
+        e.preventDefault()
+
+        await fetch("http://localhost:8000/tasks", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+
+        setProjects([])
+        const res = await fetch("http://localhost:8000/tasks")
+        const data = await res.json()
+        setProjects(data)
+    }
+
 
     const filterProjects = projects.filter((project) => project.name.toLowerCase().includes(searchTerm.toLowerCase()))
 
     const complete = projects.filter((project) => project.status === "Completed").length
     const active = projects.filter((project) => project.status === "Active").length
+    useEffect(() => {
+        fetch("http://localhost:8000/tasks")  // ← заменил 127.0.0.1 на localhost
+            .then(res => res.json())
+            .then(data => {
+                setProjects(data)
 
-
+            })
+    }, [])
     return (
         <>
             <Header />
@@ -42,11 +78,11 @@ export default function MainPage() {
                 <div className={styles.container}>
                     <div className={styles.new_project}>
                         <h1 className={styles.new} >Добавить новый проект</h1>
-                        <form onSubmit={onSubmit} className={styles.input_sec}>
+                        <form onSubmit={addProject} className={styles.input_sec}>
                             <div className={styles.sex}>
                                 <div className="name_inpu">
                                     <label className={styles.label} htmlFor="int">Название проекта</label>
-                                    <input onChange={(event) => setNewProject(event.target.value)} value={newProject} id="int" required type="text" placeholder='Мой Telegram бот' />
+                                    <input className={styles.input} onChange={(event) => setNewProject(event.target.value)} value={newProject} id="int" required type="text" placeholder='Мой Telegram бот' />
                                 </div>
                                 <div className="type_input">
                                     <label className={styles.label} htmlFor="int">Тип проекта</label>
@@ -56,6 +92,8 @@ export default function MainPage() {
                                         <option value="Mobile">Мобильное приложение</option>
                                     </select>
                                 </div>
+
+
                                 <div className="status_input">
                                     <label className={styles.label} htmlFor="int">Статус</label>
                                     <select className={styles.input} onChange={(event) => setStatus(event.target.value)} value={status} id="int">
@@ -65,16 +103,27 @@ export default function MainPage() {
                                     </select>
                                 </div>
                             </div>
-                            <div className={styles.add_button}>
-                                <button type="submit" className={styles.bth} >+ Добавить проект</button>
+                            <div className={styles.buttons}>
+
+                                <div className={styles.add_button}>
+                                    <button type="submit" className={styles.bth} >+ Добавить проект</button>
+                                </div>
+                                <div className="delete_all">
+
+                                    <div className={styles.delete_all}>
+                                        <button type='submit' onClick={delete_all} id={styles.bth2} className={styles.bth} >Удалить все проекты</button>
+                                    </div>
+                                </div>
                             </div>
                         </form>
 
+
                     </div>
+                    
                     <div className={styles.search}>
-                        <div className={styles.search_input}>
-                            <label htmlFor="search">Поиск по названию</label>
-                            <input onChange={(event) => setSearchTerm(event.target.value)} id="search" value={searchTerm} className={styles.input_search} placeholder='🔍Искать проект...' type="text" />
+                        <h1 className={styles.new} >Поиск по названию</h1>
+                        <div id={styles.sinput} className={styles.input_sec}>
+                            <input onChange={(event) => setSearchTerm(event.target.value)} id="search" value={searchTerm} className={styles.input} placeholder='🔍Искать проект...' type="text" />
                         </div>
                     </div>
                     <div className="static">
@@ -109,8 +158,14 @@ export default function MainPage() {
                                 <div key={index} className={styles.project_item}>
                                     <h2 className={styles.project_name}>{project.name}</h2>
                                     <p className={styles.project_status}>{project.status}</p>
-                                    <p className={styles.project_type}>{project.type}</p>
+                                    <p className={styles.project_type}>{project.title}</p>
+
+                                    <button onClick={() => deleteProject(project.id)} className={styles.r_bth}><svg className={styles.r_button} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
+                                        <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clipRule="evenodd" />
+                                    </svg>
+                                    </button>
                                 </div>
+
                             ))}
                         </div>
                     </div>
