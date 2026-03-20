@@ -11,7 +11,7 @@
     align-items: center;
     background-color: white;
     border-radius: 30px;
-    box-shadow:  10px 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 10px 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .new {
@@ -31,7 +31,7 @@
     width: 200px;
 }
 
-.input  {
+.input {
     background-color: #d8d8d8;
     padding: 10px;
     border: 1px solid #ccc;
@@ -49,17 +49,17 @@
 
 
 .input_sec input {
-    width: 550px;
+    width: 420px;
     height: 35px;
     padding: 10px;
     border: 1px solid #777777;
     border-radius: 10px;
     font-size: 20px;
-    
+
 }
 
 .input_sec select {
-    width: 550px;
+    width: 420px;
     height: 55px;
     padding: 10px;
     border: 1px solid #777777;
@@ -67,10 +67,10 @@
     font-size: 20px;
 }
 
-.buttons{
+.buttons {
     display: flex;
-    gap: 1240px;
-    
+    gap: 850px;
+
 }
 
 
@@ -84,8 +84,8 @@
 
 .delete_all {
     margin-top: 20px;
-    
-    
+
+
 }
 
 #bth2 {
@@ -105,11 +105,11 @@
     font-weight: bold;
 }
 
-.bth:hover{
+.bth:hover {
     background-color: black;
     transition: 0.25s ease;
-    transform: 
-    
+    transform:
+
 }
 
 .project_list {
@@ -123,7 +123,7 @@
 
 
 .project_name {
-    font-size: 40px;
+    font-size: 30px;
     margin: 0;
     flex: 1;
     /* занимает всё место, толкая статус вправо */
@@ -143,13 +143,13 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
-    background-color: #07cb6c;
+    font-size: 12px;
+    background-color: #b4e8ce;
     opacity: 0.6;
     width: 90px;
     height: 20px;
     border-radius: 10px;
-    margin: 0;
+    margin-left: 200px;
 }
 
 .project_item {
@@ -160,27 +160,24 @@
     align-items: center;
     /* выравнивание name и status по центру */
     background-color: white;
-    border-radius: 20px;
+    border-radius: 15px;
     padding: 20px;
-    width: 400px;
-    height: 130px;
     gap: 8px;
     box-sizing: border-box;
-     transition: 
-        max-height 0.35s ease,
+    transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
 }
-.project_item:hover{
-    max-height: 150px;
+
+.project_item:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .static_item {
     display: flex;
     gap: 40px;
-    
+
 }
 
 .st_project {
@@ -188,7 +185,7 @@
     width: 320px;
     padding: 20px;
     border-radius: 20px;
-    box-shadow:  10px 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 10px 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .static_text {
@@ -221,11 +218,13 @@
     background-color: white;
     border-radius: 30px;
     margin: 40px 0px;
-    box-shadow:  10px 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 10px 5px 15px rgba(0, 0, 0, 0.3);
 }
-#sinput{
+
+#sinput {
     padding-bottom: 40px;
 }
+
 .search_input {
     display: flex;
     gap: 10px;
@@ -235,37 +234,46 @@
     border: 1px solid #777777;
     border-radius: 10px;
     font-size: 20px;
-    
+
 
 }
 
 
 
 
-.r_bth {
-    position: absolute;
-    bottom: 10px;
+.r_bth {   
+    background-color: #ff0000;
+    bottom: 1px;
+    width: 40px;
+    height: 40px;
+    color: white;
+    cursor: pointer;
     padding: 0px;
-    right: 20px;
-    width: 45px;
-    height: 45px;
     opacity: 0;
     transform: translateY(15px);
-    background-color: rgb(255, 0, 0);
-    transition: 
+    transition:
         opacity 0.25s ease,
         transform 0.25s ease;
-     border: none;
-     border-radius: 10px;
+    border: none;
+    border-radius: 5px;
 }
 
 
-.project_item:hover .r_bth{
+.project_item:hover .r_bth {
     opacity: 1;
     transform: translateY(0);
+
 }
 
-.r_button{
+.r_button {
     width: 100%;
     height: 100%;
+
+}
+
+.project_hr {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 10px 0;
 }
