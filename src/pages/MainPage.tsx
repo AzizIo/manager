@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react'
 export default function MainPage() {
     const [projects, setProjects] = useState([])
     const [newProject, setNewProject] = useState("")
+    const [abbout, setAbbout] = useState("")
     const [type, setType] = useState("Bot")
     const [status, setStatus] = useState("New")
     const [searchTerm, setSearchTerm] = useState("")
@@ -22,7 +23,8 @@ export default function MainPage() {
             body: JSON.stringify({
                 name: newProject,
                 title: type,
-                status: status
+                status: status,
+                abbout: abbout
             })
         })
 
@@ -30,7 +32,7 @@ export default function MainPage() {
         const data = await res.json()
 
         setProjects(data)
-
+        setAbbout("")
         setNewProject("")
         setType("Bot")
         setStatus("New")
@@ -46,7 +48,7 @@ export default function MainPage() {
             method: "DELETE",
         })
         setProjects(prev => prev.filter(project => project.id !== id))
-        
+
     }
 
     const delete_all = async (e) => {
@@ -87,22 +89,35 @@ export default function MainPage() {
                         <h1 className={styles.new} >Добавить новый проект</h1>
                         <form onSubmit={addProject} className={styles.input_sec}>
                             <div className={styles.sex}>
-                                <div className="name_inpu">
-                                    <label className={styles.label} htmlFor="int">Название проекта</label>
-                                    <input className={styles.input} onChange={(event) => setNewProject(event.target.value)} value={newProject} id="int" required type="text" placeholder='Мой Telegram бот' />
-                                </div>
-                                <div className="type_input">
-                                    <label className={styles.label} htmlFor="int">Тип проекта</label>
-                                    <select className={styles.input} onChange={(event) => setType(event.target.value)} value={type} id="int" placeholder='Bot'>
-                                        <option value="Bot">Бот</option>
-                                        <option value="Web">Веб-сайт</option>
-                                        <option value="Mobile">Мобильное приложение</option>
-                                    </select>
+                                <div className={styles.row}>
+                                    <div className={styles.field}>
+                                        <label>Название проекта</label>
+                                        <input className={styles.input}
+                                            onChange={(event) => setNewProject(event.target.value)}
+                                            value={newProject} required
+                                            type="text"
+                                            placeholder='Мой Telegram бот'
+                                        />
+                                    </div>
+                                    <div className={styles.field}>
+                                        <label>Тип проекта</label>
+                                        <select className={styles.input} onChange={(event) => setType(event.target.value)} value={type} id="int" placeholder='Bot'>
+                                            <option value="Bot">Бот</option>
+                                            <option value="Web">Веб-сайт</option>
+                                            <option value="Mobile">Мобильное приложение</option>
+                                        </select>
+                                    </div>
                                 </div>
 
-
-                                <div className="status_input">
-                                    <label className={styles.label} htmlFor="int">Статус</label>
+                                <div className={styles.field}>
+                                    <label>Описание проекта</label>
+                                    <textarea
+                                        onChange={(event) => setAbbout(event.target.value)}
+                                        value={abbout}
+                                        placeholder="Опишите ваш проект"></textarea>
+                                </div>
+                                <div className={styles.field}>
+                                    <label>Статус</label>
                                     <select className={styles.input} onChange={(event) => setStatus(event.target.value)} value={status} id="int">
                                         <option value="New">Новый</option>
                                         <option value="Active">Активный</option>
@@ -113,20 +128,22 @@ export default function MainPage() {
                             <div className={styles.buttons}>
 
                                 <div className={styles.add_button}>
-                                    <button type="submit" className={styles.bth} >+ Добавить проект</button>
+                                    <button type="submit" className={styles.bth} >
+                                        + Добавить проект
+                                    </button>
                                 </div>
-                                <div className="delete_all">
 
-                                    <div className={styles.delete_all}>
-                                        <button type='submit' onClick={delete_all} id={styles.bth2} className={styles.bth} >Удалить все проекты</button>
-                                    </div>
+                                <div className={styles.delete_all}>
+                                    <button type='submit' onClick={delete_all} className={styles.delete} >
+                                        Удалить все проекты
+                                    </button>
                                 </div>
                             </div>
                         </form>
 
 
                     </div>
-                    
+
                     <div className={styles.search}>
                         <h1 className={styles.new} >Поиск по названию</h1>
                         <div id={styles.sinput} className={styles.input_sec}>
@@ -166,6 +183,7 @@ export default function MainPage() {
                                     <h2 className={styles.project_name}>{project.name}</h2>
                                     <p className={styles.project_status}>{project.status}</p>
                                     <p className={styles.project_type}>{project.title}</p>
+                                    <p className={styles.project_abbout}>{project.abbout}</p>
                                     <hr className={styles.project_hr} />
                                     <p className={styles.project_date}>{opdata}</p>
                                     <button onClick={() => deleteProject(project.id)} className={styles.r_bth}><div className={styles.r_button} >

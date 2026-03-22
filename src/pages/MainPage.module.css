@@ -144,76 +144,73 @@ input[type='file'] {
     padding-top: 40px;
 }
 
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .input_sec {
     padding: 20px 40px;
 }
 
-.sex {
+.row{
     display: flex;
     gap: 20px;
-    flex-wrap: wrap;
+    
+
 }
 
-.input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    border-radius: 10px;
-}
-
-.label {
+.field {
     display: flex;
-
     flex-direction: column;
-    margin-bottom: 10px;
-    font-size: 17px;
+     flex: 1;
 }
-
-
-.input_sec input {
+.field input,
+.field select,
+.field textarea {
     width: 100%;
-    max-width: 420px;
-    height: 55px;
-    padding: 10px;
+    height: 50px;
+    padding: 12px;
     border: 1px solid #e4e2e2;
     border-radius: 10px;
-    font-size: 20px;
-
+    font-size: 16px;
 }
 
-.input_sec select {
-    width: 450px;
-    max-width: 420px;
-    height: 55px;
-    padding: 10px;
-    border: 1px solid #e4e2e2;
-    border-radius: 10px;
-    font-size: 20px;
+.field textarea {
+    height: 120px;
+    resize: none;
 }
 
-
-
+/* кнопки */
 .buttons {
     display: flex;
     justify-content: space-between;
-    /* вместо gap */
+    gap: 20px;
+}
 
+.bth {
+    flex: 1;
+    height: 60px;
+    background: linear-gradient(135deg, #bc88df, #ad41d8);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.delete {
+    flex: 1;
+    height: 60px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 
-.add_button {
-    margin-top: 20px;
-    width: 200px;
-    padding-bottom: 40px;
-}
-
-
-
-.delete_all {
-    margin-top: 20px;
-
-
-}
 
 #bth2 {
     background-color: red;
