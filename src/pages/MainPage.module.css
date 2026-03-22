@@ -1,13 +1,137 @@
+/* Reset and base styles  */
+* {
+    padding: 0px;
+    margin: 0px;
+    border: none;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Links */
+
+a,
+a:link,
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/* Common */
+
+aside,
+nav,
+footer,
+header,
+section,
+main {
+    display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+ul,
+ul li {
+    list-style: none;
+}
+
+img {
+    vertical-align: top;
+}
+
+img,
+svg {
+    max-width: 100%;
+    height: auto;
+}
+
+address {
+    font-style: normal;
+}
+
+/* Form */
+
+input,
+textarea,
+button,
+select {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+}
+
+input::-ms-clear {
+    display: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+button,
+input[type="submit"] {
+    display: inline-block;
+    box-shadow: none;
+    background-color: transparent;
+    background: none;
+    cursor: pointer;
+}
+
+button::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+label {
+    cursor: pointer;
+}
+
+legend {
+    display: block;
+}
+
+input[type='file'] {
+    max-width: 100%;
+}
+
+
 .main {
     background-color: #f5f5f5;
+    min-height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .container {
-    padding: 100px 200px;
+    max-width: 1400px;
+    padding: 60px;
+    margin: 0px auto;
 }
 
 .new_project {
+    width: 100%;
+
     align-items: center;
     background-color: white;
     border-radius: 30px;
@@ -21,18 +145,16 @@
 }
 
 .input_sec {
-    gap: 140px;
-    padding: 0px 40px;
+    padding: 20px 40px;
 }
 
 .sex {
     display: flex;
     gap: 20px;
-    width: 200px;
+    flex-wrap: wrap;
 }
 
 .input {
-    background-color: #d8d8d8;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -41,35 +163,40 @@
 
 .label {
     display: flex;
+
     flex-direction: column;
     margin-bottom: 10px;
-    font-weight: 550;
     font-size: 17px;
 }
 
 
 .input_sec input {
-    width: 420px;
-    height: 35px;
+    width: 100%;
+    max-width: 420px;
+    height: 55px;
     padding: 10px;
-    border: 1px solid #777777;
+    border: 1px solid #e4e2e2;
     border-radius: 10px;
     font-size: 20px;
 
 }
 
 .input_sec select {
-    width: 420px;
+    width: 450px;
+    max-width: 420px;
     height: 55px;
     padding: 10px;
-    border: 1px solid #777777;
+    border: 1px solid #e4e2e2;
     border-radius: 10px;
     font-size: 20px;
 }
 
+
+
 .buttons {
     display: flex;
-    gap: 850px;
+    justify-content: space-between;
+    /* вместо gap */
 
 }
 
@@ -93,25 +220,23 @@
 }
 
 .bth {
-    width: 270px;
+    width: 100%;
     height: 60px;
     font-size: 20px;
-    background-color: #0051ff;
+    background: linear-gradient(135deg, #bc88df, #ad41d8);
     color: white;
-    padding: 1px 1px;
+    padding: 10px 5px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .bth:hover {
     background-color: black;
     transition: 0.25s ease;
-    transform:
-
 }
-
+    
 .project_list {
     display: flex;
     /* карточки в ряд */
@@ -149,7 +274,7 @@
     width: 90px;
     height: 20px;
     border-radius: 10px;
-    margin-left: 200px;
+    margin-left: auto;
 }
 
 .project_item {
@@ -228,7 +353,8 @@
 .search_input {
     display: flex;
     gap: 10px;
-    width: 550px;
+    width: 100%;
+    max-width: 550px;
     height: 55px;
     padding: 10px;
     border: 1px solid #777777;
@@ -238,11 +364,16 @@
 
 }
 
+.my {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 20px 0px;
+}
 
 
 
-.r_bth {   
-    background-color: #ff0000;
+
+.r_bth {
     bottom: 1px;
     width: 40px;
     height: 40px;
@@ -276,4 +407,51 @@
     border: none;
     border-top: 1px solid #eee;
     margin: 10px 0;
+}
+
+
+@media (max-width: 800px) {
+
+
+
+    .main {
+        margin-top: 20px;
+    }
+
+    .new {
+        font-size: 20px;
+        padding-left: 20px;
+        padding-top: 20px;
+    }
+
+
+
+
+    .input_sec {
+        gap: 30px;
+        padding: 10px 20px;
+
+
+    }
+
+    .sex {
+        display: block;
+        gap: 20px;
+        width: 200px;
+    }
+
+    .label {
+        font-size: 15px;
+        font-weight: 400;
+
+    }
+
+    .buttons {
+        display: block;
+
+    }
+
+    .static_list {
+        display: none;
+    }
 }
