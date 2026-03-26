@@ -1,9 +1,26 @@
 import styles from './Header.module.css'
 import nisa from '../assets/icons8-человек-64.png'
-import { s } from 'motion/react-client'
+import { div, s } from 'motion/react-client'
 import { Link } from 'react-router-dom';
+import { jwtDecode } from "jwt-decode"
 
 export default function Header() {
+    const token = localStorage.getItem("token")
+    let userName = ""
+    if (token) {
+        try {
+            const decoded: any = jwtDecode(token)
+            userName = `${decoded.firstName} ${decoded.lastName}`
+        } catch {
+            // токен невалидный
+        }
+    }
+    const logout = () => {
+        localStorage.removeItem("token")
+        localStorage.removeItem("firstName")
+        localStorage.removeItem("lastName")
+        window.location.href = "/welcome"
+    }
     return (
         <div className={styles.header}>
             <div className={styles.container}>
@@ -18,6 +35,16 @@ export default function Header() {
                     <Link to="/welcome" >
                         <img src={nisa} alt="" />
                     </Link>
+                    <div className="name">
+                        {
+                            userName && (
+                                <div className={styles.user_info}>
+                                    <span>👤 {userName}</span>
+                                    <button onClick={logout}>Выйти</button>
+                                </div>
+                            )
+                        }
+                    </div>
 
                 </div>
             </div>

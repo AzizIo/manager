@@ -142,7 +142,9 @@ input[type='file'] {
     font-size: 30px;
     padding-left: 40px;
     padding-top: 40px;
-}
+} 
+
+
 
 .form{
     display: flex;
@@ -162,6 +164,7 @@ input[type='file'] {
 }
 
 .field {
+    margin: 10px 0px;
     display: flex;
     flex-direction: column;
      flex: 1;
@@ -174,7 +177,18 @@ input[type='file'] {
     padding: 12px;
     border: 1px solid #e4e2e2;
     border-radius: 10px;
+    background-color: #f9fafb;
     font-size: 16px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+}
+
+.label_mob{
+    display: none;
 }
 
 .field textarea {
@@ -184,30 +198,31 @@ input[type='file'] {
 
 /* кнопки */
 .buttons {
+    margin: 10px 0px;
+
     display: flex;
     justify-content: space-between;
     gap: 20px;
 }
 
-.bth {
-    flex: 1;
-    height: 60px;
-    background: linear-gradient(135deg, #bc88df, #ad41d8);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 18px;
-    cursor: pointer;
-}
 
 .delete {
+    margin: 10px 0px;
     flex: 1;
     height: 60px;
     background: red;
-    color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    width: 100%;
+    height: 60px;
+    font-size: 20px;
+    color: white;
+    padding: 10px 5px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
 }
 
 
@@ -217,10 +232,10 @@ input[type='file'] {
 }
 
 .bth {
+    background: linear-gradient(135deg, #8100db, #7108e7);
     width: 100%;
     height: 60px;
     font-size: 20px;
-    background: linear-gradient(135deg, #bc88df, #ad41d8);
     color: white;
     padding: 10px 5px;
     border: none;
@@ -229,11 +244,6 @@ input[type='file'] {
     font-weight: 600;
 }
 
-.bth:hover {
-    background-color: black;
-    transition: 0.25s ease;
-}
-    
 .project_list {
     display: flex;
     /* карточки в ряд */
@@ -253,20 +263,23 @@ input[type='file'] {
 
 .project_type {
     font-size: 20px;
-    color: #888;
+    color: #88888896;
     width: 100%;
     /* занимает всю строку → переносится вниз */
     margin: 0;
 }
 
-
+.project_date{
+     color: #88888896;
+}
 
 .project_status {
+    color: #024d21;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
-    background-color: #b4e8ce;
+    font-size: 17px;
+    background-color: #dbfce7;
     opacity: 0.6;
     width: 90px;
     height: 20px;
@@ -316,14 +329,21 @@ input[type='file'] {
     margin: 0;
 }
 
+.all_project{
+    background: linear-gradient(135deg, #8100db, #7108e7);
+}
 .static_count {
     font-size: 30px;
     font-weight: bold;
     margin: 5px 0 0 0;
 }
 
+.static_text1{
+    color: white;
+}
+
 #all_color {
-    color: black;
+    color: white;
 }
 
 #active_color {
@@ -344,7 +364,7 @@ input[type='file'] {
 }
 
 #sinput {
-    padding-bottom: 40px;
+    padding: 20px 20px;
 }
 
 .search_input {
@@ -371,12 +391,14 @@ input[type='file'] {
 
 
 .r_bth {
+    position: absolute;
     bottom: 1px;
     width: 40px;
     height: 40px;
     color: white;
     cursor: pointer;
     padding: 0px;
+    right: 10px;
     opacity: 0;
     transform: translateY(15px);
     transition:
@@ -423,12 +445,11 @@ input[type='file'] {
 
 
 
-
-    .input_sec {
-        gap: 30px;
-        padding: 10px 20px;
-
-
+    .label_desk{
+        display: none;
+    }
+    .label_mob{
+        display: flex;
     }
 
     .sex {
