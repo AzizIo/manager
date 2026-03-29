@@ -5,11 +5,13 @@ import Header from './components/Header';
 import MainPage from './pages/MainPage';
 import Welcome from './pages/WelcomPage';
 import Register from './pages/RegisterPage'
+import Users from './pages/UsersPage'
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/users" element={<Users />} />
         <Route path="/register" element={<Register/>} />
         <Route path="/" element={<MainPage />} />
         <Route path="/welcome" element={<Welcome />} />

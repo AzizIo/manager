@@ -3,23 +3,30 @@ import Header from "../components/Header";
 import { Link } from 'react-router-dom';
 import { useState } from 'react'
 import axios from "axios";
+import { useNavigate } from "react-router-dom"
+import { jwtDecode } from "jwt-decode"
+import API from "../utils/api";
 export default function Register() {
-    const API = axios.create({
-        baseURL: "http://localhost:8000",
-    });
+    const navigate = useNavigate()
+
     const [email, setEmail] = useState("")
     const [pass, setPass] = useState("")
     const [fitstName, setFirstName] = useState("")
     const [lastName, setLasttName] = useState("")
 
-    const reg = () => {
-        API.post("/register", {
+    const reg = async () => {
+        const res = await API.post("/register", {
             Email: email,
             Password: pass,
             FirstName: fitstName,
             LastName: lastName
         });
-        alert("register!")
+        localStorage.setItem("token", res.data.access_token);
+        const decoded: any = jwtDecode(res.data.access_token)
+        localStorage.setItem("firstName", decoded.firstName)
+        localStorage.setItem("lastName", decoded.lastName)
+
+        navigate("/")
 
     }
 
@@ -33,7 +40,7 @@ export default function Register() {
                     <p>Зарегестрируйтесь  в Telegram Project Manager</p>
                 </div>
 
-                <form onSubmit={(e) => {e.preventDefault(); reg()}}>
+                <form onSubmit={(e) => { e.preventDefault(); reg() }}>
                     <div className={styles.mai}>
                         <div className={styles.inpu}>
                             <div className={styles.email_input}>

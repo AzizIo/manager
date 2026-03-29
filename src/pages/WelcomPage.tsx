@@ -6,11 +6,10 @@ import { useState } from 'react'
 import { jwtDecode } from "jwt-decode"
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
+import API from "../utils/api";
 export default function Welcome() {
     const navigate = useNavigate()
-    const API = axios.create({
-        baseURL: "http://localhost:8000",
-    });
+    
 
     const [email, setEmail] = useState("")
     const [pass, setPass] = useState("")

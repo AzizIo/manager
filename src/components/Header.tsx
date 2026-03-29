@@ -3,7 +3,7 @@ import nisa from '../assets/icons8-человек-64.png'
 import { div, s } from 'motion/react-client'
 import { Link } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode"
-
+import logimg from '../assets/icons8-выйти-48.png'
 export default function Header() {
     const token = localStorage.getItem("token")
     let userName = ""
@@ -31,21 +31,27 @@ export default function Header() {
 
                     </div>
                 </Link>
-                <div className={styles.icon}>
-                    <Link to="/welcome" >
-                        <img src={nisa} alt="" />
-                    </Link>
-                    <div className="name">
-                        {
-                            userName && (
-                                <div className={styles.user_info}>
-                                    <span>👤 {userName}</span>
-                                    <button onClick={logout}>Выйти</button>
-                                </div>
-                            )
-                        }
+                <div className={styles.acc}>
+                    <div className={styles.icon}>
+                        <Link to="/users" >
+                            <span>сообщество</span>
+                        </Link>
                     </div>
-
+                    <div className="sp">
+                        |
+                    </div>
+                        <div className="alsdlasdlas">
+                            <div className="name">
+                                {
+                                    userName && (
+                                        <div className={styles.user_info}>
+                                            <span  >👤 {userName}</span>
+                                            <button className={styles.logout} onClick={logout}><img src={logimg} alt="" /></button>
+                                        </div>
+                                    )
+                                }
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>

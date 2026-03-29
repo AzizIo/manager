@@ -5,6 +5,8 @@ import image from '../assets/icons8-полная-корзина-24.png'
 import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate } from "react-router-dom"
 import { jwtDecode } from "jwt-decode"
+import axios from "axios";
+import API from "../utils/api";
 
 /* ─── Анимированный счётчик ──────────────────────────────────────── */
 function AnimatedCounter({ value }) {
@@ -86,39 +88,41 @@ export default function MainPage() {
     /* ── API ── */
     const addProject = async (event) => {
         event.preventDefault()
-        await fetch("http://localhost:8000/tasks", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name: newProject, title: type, status, abbout }),
+        const token = localStorage.getItem("token")
+        await API.post("/tasks", {
+            name: newProject,
+            abbout,
+            title: type,
+            status
         })
-        const data = await fetch("http://localhost:8000/tasks").then(r => r.json())
+        const res = await API.get("/tasks")
+        const data = res.data
         setProjects(data)
         setAbbout(""); setNewProject(""); setType("Bot"); setStatus("New")
     }
 
     const deleteProject = async (id) => {
-        await fetch(`http://localhost:8000/tasks/${id}`, { method: "DELETE" })
+        await API.delete(`/tasks/${id}`)
         setProjects(prev => prev.filter(p => p.id !== id))
     }
 
     const delete_all = async (e) => {
         e.preventDefault()
-        await fetch("http://localhost:8000/tasks", {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" },
-        })
+        await API.delete("/tasks")
         setProjects([])
     }
     const navigate = useNavigate()
-    useEffect(() => {
-        fetch("http://localhost:8000/tasks").then(r => r.json()).then(setProjects)
-    }, [])
     useEffect(() => {
         const token = localStorage.getItem("token")
         if (!token) {
             navigate("/welcome")
         }
     }, [])
+    useEffect(()  => {
+
+        API.get("/tasks").then(res => setProjects(res.data))
+    }, [])  
+    
 
     /* ── Вычисления ── */
     const filterProjects = projects.filter(p =>

@@ -1,0 +1,118 @@
+
+*{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    max-width: 1400px;
+    padding: 60px;
+    margin: 0px auto;
+}
+.comm{
+    background-color:#8e1afc;
+    padding: 40px 10px;
+    border-radius: 20px;
+}
+
+.pimg{
+    max-width: 100px;
+}
+
+.headp{
+    color: white;
+}
+.headcoom{
+    color: white;
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 30px;
+}
+.project_list {
+    display: flex;
+    /* карточки в ряд */
+    gap: 30px;
+    /* расстояние между карточками */
+    flex-wrap: wrap;
+    /* перенос на новую строку, если не помещается */
+}
+
+.cont{
+    display: flex;
+    gap: 20px;
+}
+
+
+.project_name {
+    font-size: 30px;
+    margin: 0;
+    flex: 1;
+    /* занимает всё место, толкая статус вправо */
+}
+
+.project_type {
+    font-size: 20px;
+    color: #88888896;
+    width: 100%;
+    /* занимает всю строку → переносится вниз */
+    margin: 0;
+}
+
+.project_date{
+     color: #88888896;
+}
+
+.project_status {
+    color: #024d21;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    background-color: #dbfce7;
+    opacity: 0.6;
+    width: 90px;
+    height: 20px;
+    border-radius: 10px;
+    margin-left: auto;
+}
+
+.project_item {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    /* перенос project_type на новую строку */
+    align-items: center;
+    /* выравнивание name и status по центру */
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    gap: 8px;
+    box-sizing: border-box;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.project_item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.static_item {
+    display: flex;
+    gap: 40px;
+
+}
+
+.st_project {
+    background-color: white;
+    width: 320px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 10px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.static_text {
+    color: #888;
+    font-size: 15px;
+    margin: 0;
+}
