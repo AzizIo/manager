@@ -2,20 +2,33 @@
 *{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.main{
+    background-color: #f5f5f5;
+
+}
 
 .container {
     max-width: 1400px;
     padding: 60px;
     margin: 0px auto;
+    height: 100vh;
+
+}
+
+.project_list{
+    margin-top: 80px;
 }
 .comm{
     background-color:#8e1afc;
-    padding: 40px 10px;
+    padding: 40px 25px;
     border-radius: 20px;
 }
 
 .pimg{
-    max-width: 100px;
+    max-width: 60px;
+    background-color: #a943fb;
+    padding: 10px;
+    border-radius: 12px;
 }
 
 .headp{
@@ -23,7 +36,6 @@
 }
 .headcoom{
     color: white;
-    margin-top: 10px;
     font-weight: 600;
     font-size: 30px;
 }

@@ -4,12 +4,12 @@ import { motion, AnimatePresence } from "motion/react"
 import image from '../assets/icons8-полная-корзина-24.png'
 import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate } from "react-router-dom"
-import { jwtDecode } from "jwt-decode"
-import axios from "axios";
+import type { Variants } from "framer-motion"
 import API from "../utils/api";
+import type { Project, ProjectStatus, ProjectType } from '../types/project'
 
 /* ─── Анимированный счётчик ──────────────────────────────────────── */
-function AnimatedCounter({ value }) {
+function AnimatedCounter({ value }: { value: number }) {
     const [display, setDisplay] = useState(0)
     const prevRef = useRef(0)
 
@@ -20,7 +20,7 @@ function AnimatedCounter({ value }) {
         const duration = 700
         const startTime = performance.now()
 
-        const tick = (now) => {
+        const tick = (now: number) => {
             const t = Math.min((now - startTime) / duration, 1)
             const eased = 1 - Math.pow(1 - t, 3)
             setDisplay(Math.round(start + (end - start) * eased))
@@ -34,16 +34,16 @@ function AnimatedCounter({ value }) {
 }
 
 /* ─── Варианты анимаций ──────────────────────────────────────────── */
-const fadeUp = {
+const fadeUp: Variants = {
     hidden: { opacity: 0, y: 28 },
-    visible: (delay = 0) => ({
+    visible: (delay: number = 0) => ({
         opacity: 1,
         y: 0,
         transition: { duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] },
     }),
 }
 
-const fadeLeft = {
+const fadeLeft: Variants = {
     hidden: { opacity: 0, x: -24 },
     visible: {
         opacity: 1, x: 0,
@@ -51,9 +51,9 @@ const fadeLeft = {
     },
 }
 
-const cardVariant = {
+const cardVariant: Variants = {
     hidden: { opacity: 0, y: 24, scale: 0.97 },
-    visible: (i) => ({
+    visible: (i: number) => ({
         opacity: 1, y: 0, scale: 1,
         transition: { duration: 0.45, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] },
     }),
@@ -63,9 +63,9 @@ const cardVariant = {
     },
 }
 
-const statVariant = {
+const statVariant: Variants = {
     hidden: { opacity: 0, y: 20, scale: 0.95 },
-    visible: (i) => ({
+    visible: (i: number) => ({
         opacity: 1, y: 0, scale: 1,
         transition: { duration: 0.5, delay: 0.15 + i * 0.1, ease: [0.22, 1, 0.36, 1] },
     }),
@@ -73,40 +73,40 @@ const statVariant = {
 
 /* ─── Компонент ──────────────────────────────────────────────────── */
 export default function MainPage() {
-    const [projects, setProjects] = useState([])
-    const [newProject, setNewProject] = useState("")
-    const [abbout, setAbbout] = useState("")
-    const [type, setType] = useState("Bot")
-    const [status, setStatus] = useState("New")
-    const [searchTerm, setSearchTerm] = useState("")
+    const [projects, setProjects] = useState<Project[]>([])
+    const [newProject, setNewProject] = useState<string>("")
+    const [abbout, setAbbout] = useState<string>("")
+    const [type, setType] = useState<ProjectType>("Bot")
+    const [status, setStatus] = useState<ProjectStatus>("New")
+    const [searchTerm, setSearchTerm] = useState<string>("")
 
-    const formatDate = (date) =>
+    const formatDate = (date: string) =>
         new Date(date)
             .toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" })
             .replace(" г.", "") + " года"
 
     /* ── API ── */
-    const addProject = async (event) => {
+    const addProject = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         const token = localStorage.getItem("token")
-        await API.post("/tasks", {
+        await API.post<Project[]>("/tasks", {
             name: newProject,
             abbout,
             title: type,
             status
         })
-        const res = await API.get("/tasks")
+        const res = await API.get<Project[]>("/tasks")
         const data = res.data
         setProjects(data)
         setAbbout(""); setNewProject(""); setType("Bot"); setStatus("New")
     }
 
-    const deleteProject = async (id) => {
+    const deleteProject = async (id: number) => {
         await API.delete(`/tasks/${id}`)
         setProjects(prev => prev.filter(p => p.id !== id))
     }
 
-    const delete_all = async (e) => {
+    const delete_all = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         await API.delete("/tasks")
         setProjects([])
@@ -120,7 +120,7 @@ export default function MainPage() {
     }, [])
     useEffect(()  => {
 
-        API.get("/tasks").then(res => setProjects(res.data))
+        API.get<Project[]>("/tasks").then(res => setProjects(res.data))
     }, [])  
     
 
@@ -184,7 +184,7 @@ export default function MainPage() {
                                         <label>Тип проекта</label>
                                         <motion.select
                                             className={styles.input}
-                                            onChange={e => setType(e.target.value)}
+                                            onChange={e => setType(e.target.value as ProjectType)}
                                             value={type}
                                             whileFocus={{ scale: 1.01, boxShadow: "0 0 0 2px #8100db55" }}
                                             transition={{ duration: 0.2 }}
@@ -225,7 +225,7 @@ export default function MainPage() {
                                     <label>Статус</label>
                                     <motion.select
                                         className={styles.input}
-                                        onChange={e => setStatus(e.target.value)}
+                                        onChange={e => setStatus(e.target.value as ProjectStatus)}
                                         value={status}
                                         whileFocus={{ scale: 1.01, boxShadow: "0 0 0 2px #8100db55" }}
                                         transition={{ duration: 0.2 }}

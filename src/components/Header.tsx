@@ -27,7 +27,7 @@ export default function Header() {
                 <Link to="/" >
                     <div className="text">
                         <h1 className={styles.h1} >Telegram Project Manager</h1>
-                        <p>Упровление ботами, каналами и скриптами</p>
+                        <p className={styles.p} >Упровление ботами, каналами и скриптами</p>
 
                     </div>
                 </Link>

@@ -1,10 +1,8 @@
-import { h1, s } from "motion/react-client";
 import styles from './WelcomePage.module.css'
 import Header from "../components/Header";
 import { Link } from 'react-router-dom';
 import { useState } from 'react'
 import { jwtDecode } from "jwt-decode"
-import axios from "axios";
 import { useNavigate } from "react-router-dom"
 import API from "../utils/api";
 export default function Welcome() {
