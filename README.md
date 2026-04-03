@@ -1,73 +1,66 @@
-# React + TypeScript + Vite
+# 📋 Менеджер Проектов
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Удобный веб-сервис для управления личными проектами с авторизацией и сообществом.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Возможности
 
-## React Compiler
+- 🔐 **Авторизация** — регистрация и вход по токену
+- ➕ **Создание проектов** — название, тип, описание и статус
+- 🗂️ **Типы проектов** — Бот, Веб-сайт, Мобильное приложение
+- 📊 **Статистика** — счётчики всех, активных и завершённых проектов
+- 🔍 **Поиск** — фильтрация по названию в реальном времени
+- 🗑️ **Удаление** — по одному или всех сразу
+- 🌍 **Сообщество** — просмотр проектов других пользователей
+- 🎨 **Анимации** — плавные переходы с Framer Motion
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Технологии
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Сторона | Стек |
+|---------|------|
+| Frontend | React, TypeScript, Framer Motion |
+| Стили | CSS Modules |
+| Роутинг | React Router |
+| HTTP | Axios (через кастомный `API`) |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🚀 Быстрый старт
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Установить зависимости
+npm install
+
+# Запустить в режиме разработки
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📁 Структура проекта
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+src/
+├── components/      # Переиспользуемые компоненты (Header и др.)
+├── pages/           # Страницы (MainPage, Welcome и др.)
+├── assets/          # Иконки и изображения
+├── utils/           # API-утилиты
+└── types/           # TypeScript-типы
+```
+
+---
+
+## 📌 Статусы проектов
+
+| Статус | Описание |
+|--------|----------|
+| 🆕 Новый | Только создан |
+| ⚡ Активный | В работе |
+| ✅ Завершён | Готово |
+
+---
+
+> Сделано с ❤️ как пет-проект для практики React + TypeScript
